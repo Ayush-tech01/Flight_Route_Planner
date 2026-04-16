@@ -1,0 +1,136 @@
+# ✈️ Flight Route Planner (DAA & AI Project)
+
+## 📌 Overview
+
+The **Flight Route Planner** is a Python-based GUI application that finds optimal flight paths between airports using multiple algorithms from **Data Structures & Algorithms (DAA)** and **Artificial Intelligence (AI)**.
+
+It allows users to compare different pathfinding strategies visually and understand how each algorithm behaves.
+
+---
+
+## 🚀 Features
+
+* Interactive GUI built using **Tkinter**
+* Supports multiple algorithms:
+
+  * Dijkstra’s Algorithm (Shortest Path)
+  * Breadth-First Search (Minimum Stops)
+  * Depth-First Search
+  * A* Algorithm (Heuristic-based)
+* Graph visualization using **NetworkX** and **Matplotlib**
+* Dynamic edge weights (weather + congestion simulation)
+* Displays:
+
+  * Route path
+  * Total cost
+  * Number of stops
+
+---
+
+## 🧠 Algorithms Used
+
+### 1. Dijkstra’s Algorithm
+
+Finds the shortest path based on total travel cost.
+
+### 2. Breadth-First Search (BFS)
+
+Finds the path with the minimum number of stops.
+
+### 3. Depth-First Search (DFS)
+
+Explores paths deeply and returns the best found route.
+
+### 4. A* Algorithm
+
+Uses heuristic (Euclidean distance) to find an efficient path.
+
+---
+
+## 🛠️ Technologies Used
+
+* Python
+* Tkinter (GUI)
+* NetworkX (Graph handling)
+* Matplotlib (Visualization)
+* PIL (Image handling)
+
+---
+
+## 📂 Project Structure
+
+```
+app.py
+requirements.txt
+README.md
+```
+
+---
+
+## ▶️ How to Run
+
+1. Clone the repository or download the files
+
+2. Install dependencies:
+
+```
+pip install -r requirements.txt
+```
+
+3. Run the project:
+
+```
+python app.py
+```
+
+---
+
+## 📊 Sample Airports
+
+* DEL (Delhi)
+* MUM (Mumbai)
+* BLR (Bangalore)
+* HYD (Hyderabad)
+* CCU (Kolkata)
+* DXB (Dubai)
+* SIN (Singapore)
+* LHR (London)
+
+---
+
+## 💡 How It Works
+
+* Airports are modeled as nodes in a graph.
+* Routes between them are edges with weights.
+* Weight = Distance + Weather Penalty + Congestion Factor.
+* Selected algorithm computes the best route.
+
+---
+
+## 📸 Output
+
+* GUI displays selected route and cost.
+* Graph visualization highlights optimal path.
+
+---
+
+## ⚠️ Notes
+
+* Results may vary due to random weather and congestion factors.
+* BFS does not guarantee minimum cost (only minimum stops).
+
+---
+
+## 👨‍💻 Author
+
+Ayush Bhatt
+Class: 25MCA1/A
+
+---
+
+## 📚 Subject Use
+
+* DAA (Algorithm implementation)
+* AI (Heuristic-based pathfinding using A*)
+
+---
