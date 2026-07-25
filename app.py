@@ -1,18 +1,16 @@
 import tkinter as tk
 from tkinter import messagebox, ttk
 from PIL import Image, ImageTk
-import urllib.request                                #to fetch image directly from url 
-import io                                            #to fetch image directly from url 
+import urllib.request                                
+import io                                            
 import networkx as nx
 import matplotlib.pyplot as plt
 import math
 import random
-import heapq                                          #used for best-first/Dijkstra Algot 
-from collections import deque                         #used for breadth first search
+import heapq                                          
+from collections import deque                        
 
-# -----------------------------
-# Step 1: Define airports (nodes) and coordinates
-# -----------------------------
+
 airport_coords = {
     'DEL': (0, 0),     # Delhi
     'MUM': (4, -1),    # Mumbai
@@ -24,10 +22,7 @@ airport_coords = {
     'LHR': (15, 3)     # London
 }
 
-# -----------------------------
-# Step 2: Define connections (edges)
-# -----------------------------
-#---distance in km-----
+# Distance (km)
 edges = [
     ('DEL', 'MUM', 11),
     ('DEL', 'HYD', 10),
@@ -43,7 +38,6 @@ edges = [
     ('HYD', 'DXB', 8)
 ]
 
-# Create the graph
 G = nx.Graph()
 for u, v, dist in edges:
     weather_penalty = random.randint(0, 2)
@@ -51,9 +45,8 @@ for u, v, dist in edges:
     total_cost = dist * congestion + weather_penalty
     G.add_edge(u, v, weight=total_cost, distance=dist, penalty=weather_penalty)
 
-# -----------------------------
-# Algorithm 1: Dijkstra's Algorithm
-# -----------------------------
+
+# Dijkstra's Algorithm
 def dijkstra_flight_planner(graph, start, goal):
     """Shortest path using Dijkstra's algorithm"""
     pq = [(0, start, [start])]
@@ -78,9 +71,8 @@ def dijkstra_flight_planner(graph, start, goal):
     
     return None, float('inf')
 
-# -----------------------------
-# Algorithm 2: BFS (Breadth-First Search)
-# -----------------------------
+
+# BFS (Breadth-First Search)
 def bfs_flight_planner(graph, start, goal):
     """Find path with minimum stops using BFS"""
     queue = deque([(start, [start], 0)])
@@ -101,9 +93,8 @@ def bfs_flight_planner(graph, start, goal):
     
     return None, float('inf')
 
-# -----------------------------
-# Algorithm 3: DFS (Depth-First Search)
-# -----------------------------
+
+# DFS (Depth-First Search)
 def dfs_flight_planner(graph, start, goal):
     """Find path using DFS"""
     stack = [(start, [start], 0)]
@@ -131,9 +122,8 @@ def dfs_flight_planner(graph, start, goal):
     
     return best_path, best_cost if best_path else (None, float('inf'))
 
-# -----------------------------
-# Algorithm 4: A* Algorithm (Heuristic-based)
-# -----------------------------
+
+# A* Algorithm (Heuristic-based)
 def heuristic(a, b):
     """Euclidean distance heuristic"""
     (x1, y1), (x2, y2) = airport_coords[a], airport_coords[b]
@@ -172,17 +162,13 @@ def astar_flight_planner(graph, start, goal):
 
     return None, float('inf')
 
-# -----------------------------
-# GUI Setup
-# -----------------------------
+# GUI
 root = tk.Tk()
 root.title("✈️ Flight Route Planner - Multiple Algorithms")
 root.geometry("500x550")
 
-# Global variable to store background image reference
 bg_image = None
 
-# Load background image from URL
 try:
     image_url = "https://images.unsplash.com/photo-1436491865332-7a61a109cc05?w=800"
     with urllib.request.urlopen(image_url) as url:
@@ -192,7 +178,6 @@ try:
     image = image.resize((500, 550), Image.Resampling.LANCZOS)
     bg_image = ImageTk.PhotoImage(image)
     
-    # Create a canvas for background
     canvas = tk.Canvas(root, width=500, height=550)
     canvas.pack(fill="both", expand=True)
     canvas.create_image(0, 0, image=bg_image, anchor="nw")
@@ -212,7 +197,6 @@ def find_route():
         messagebox.showwarning("Invalid Input", "Start aur destination airport alag hone chahiye!")
         return
 
-    # Algorithm selection dictionary
     algorithms = {
         "Dijkstra": dijkstra_flight_planner,
         "BFS (Breadth-First Search)": bfs_flight_planner,
@@ -220,7 +204,6 @@ def find_route():
         "A* (Heuristic)": astar_flight_planner
     }
     
-    # Select and run the algorithm
     planner = algorithms[algo]
     path, total_cost = planner(G, start, end)
     
@@ -228,28 +211,23 @@ def find_route():
         messagebox.showerror("Error", "Koi route nahi mila!")
         return
 
-    # Display results
     result_text = f"Algorithm Used: {algo}\n\n" \
                   f"Route: {' → '.join(path)}\n\n" \
                   f"Total Cost: {total_cost:.2f}\n" \
                   f"Number of Stops: {len(path) - 1}"
     result_label.config(text=result_text)
 
-    # --- Visualize route ---
     pos = airport_coords
     plt.figure(figsize=(12, 8))
-    
-    # Draw all nodes and edges
+
     nx.draw(G, pos, with_labels=True, node_color='skyblue', node_size=2500, 
             font_size=11, font_weight='bold', edge_color='gray')
-    
-    # Draw edge labels
+
     nx.draw_networkx_edge_labels(G, pos, 
                                  edge_labels={(u, v): f"{d['distance']}km" 
                                             for u, v, d in G.edges(data=True)},
                                  font_size=9)
 
-    # Highlight the optimal path
     path_edges = list(zip(path, path[1:]))
     nx.draw_networkx_nodes(G, pos, nodelist=path, node_color='lightgreen', node_size=2500)
     nx.draw_networkx_edges(G, pos, edgelist=path_edges, width=4, edge_color='red', 
@@ -260,19 +238,15 @@ def find_route():
     plt.tight_layout()
     plt.show()
 
-# -----------------------------
-# Create GUI Widgets
-# -----------------------------
+
 airports = list(airport_coords.keys())
 start_var = tk.StringVar(value=airports[0])
 end_var = tk.StringVar(value=airports[-1])
 algo_var = tk.StringVar(value="Dijkstra")
 
-# Title
 canvas.create_text(250, 30, text="✈️ Flight Route Planner ✈️", 
                   font=("Arial", 16, "bold"), fill="white")
 
-# Algorithm Selection
 canvas.create_text(250, 70, text="Select Algorithm:", 
                   font=("Arial", 13, "bold"), fill="white")
 
@@ -284,28 +258,24 @@ algo_menu = ttk.Combobox(root, textvariable=algo_var,
                          state="readonly", width=25, font=("Arial", 11))
 canvas.create_window(250, 100, window=algo_menu)
 
-# Start Airport Selection
 canvas.create_text(250, 140, text="Select Start Airport:", 
                   font=("Arial", 13, "bold"), fill="white")
 start_menu = tk.OptionMenu(root, start_var, *airports)
 start_menu.config(font=("Arial", 11), bg="white", width=15)
 canvas.create_window(250, 170, window=start_menu)
 
-# Destination Airport Selection
 canvas.create_text(250, 210, text="Select Destination Airport:", 
                   font=("Arial", 13, "bold"), fill="white")
 end_menu = tk.OptionMenu(root, end_var, *airports)
 end_menu.config(font=("Arial", 11), bg="white", width=15)
 canvas.create_window(250, 240, window=end_menu)
 
-# Find Route Button
 find_button = tk.Button(root, text="🔍 Find Best Route", command=find_route, 
                        bg="#4CAF50", fg="white", font=("Arial", 13, "bold"), 
                        relief="raised", bd=4, padx=20, pady=5,
                        activebackground="#45a049")
 canvas.create_window(250, 290, window=find_button)
 
-# Result Label
 result_label = tk.Label(root, text="Select Algorithm and find route!", 
                        font=("Arial", 11), justify="left", 
                        wraplength=450, bg="white", relief="solid", bd=3, 
