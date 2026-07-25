@@ -47,7 +47,7 @@ for u, v, dist in edges:
 
 
 # Dijkstra's Algorithm
-def dijkstra_flight_planner(graph, start, goal):
+def dijkstra(graph, start, goal):
     """Shortest path using Dijkstra's algorithm"""
     pq = [(0, start, [start])]
     visited = set()
@@ -73,7 +73,7 @@ def dijkstra_flight_planner(graph, start, goal):
 
 
 # BFS (Breadth-First Search)
-def bfs_flight_planner(graph, start, goal):
+def bfs(graph, start, goal):
     """Find path with minimum stops using BFS"""
     queue = deque([(start, [start], 0)])
     visited = {start}
@@ -95,7 +95,7 @@ def bfs_flight_planner(graph, start, goal):
 
 
 # DFS (Depth-First Search)
-def dfs_flight_planner(graph, start, goal):
+def dfs(graph, start, goal):
     """Find path using DFS"""
     stack = [(start, [start], 0)]
     visited = set()
@@ -129,7 +129,7 @@ def heuristic(a, b):
     (x1, y1), (x2, y2) = airport_coords[a], airport_coords[b]
     return math.sqrt((x1 - x2)**2 + (y1 - y2)**2)
 
-def astar_flight_planner(graph, start, goal):
+def astar(graph, start, goal):
     """A* algorithm with heuristic"""
     open_set = {start}
     came_from = {}
@@ -198,10 +198,10 @@ def find_route():
         return
 
     algorithms = {
-        "Dijkstra": dijkstra_flight_planner,
-        "BFS (Breadth-First Search)": bfs_flight_planner,
-        "DFS (Depth-First Search)": dfs_flight_planner,
-        "A* (Heuristic)": astar_flight_planner
+        "Dijkstra": dijkstra,
+        "BFS (Breadth-First Search)": bfs,
+        "DFS (Depth-First Search)": dfs,
+        "A* (Heuristic)": astar
     }
     
     planner = algorithms[algo]
@@ -282,7 +282,6 @@ result_label = tk.Label(root, text="Select Algorithm and find route!",
                        padx=15, pady=15)
 canvas.create_window(250, 400, window=result_label)
 
-# Information Footer
 canvas.create_text(250, 520, 
                   text="💡 Tip: Different algorithms give different results!", 
                   font=("Arial", 10, "italic"), fill="yellow")
