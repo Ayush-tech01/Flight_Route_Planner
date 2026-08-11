@@ -2,26 +2,26 @@
 
 ## 📌 Overview
 
-The **Flight Route Planner** is a Python-based GUI application that finds optimal flight paths between airports using multiple algorithms from **Data Structures & Algorithms (DAA)** and **Artificial Intelligence (AI)**.
+**Flight Route Planner** is a Python-based GUI application that finds optimal flight routes between different airports using algorithms from **Data Structures & Algorithms (DAA)** and **Artificial Intelligence (AI)**.
 
-It allows users to compare different pathfinding strategies visually and understand how each algorithm behaves.
+The application allows users to compare different pathfinding algorithms and see how each one finds a route.
 
 ---
 
 ## 🚀 Features
 
-* Interactive GUI built using **Tkinter**
-* Supports multiple algorithms:
+* Interactive GUI using **Tkinter**
+* Supports multiple pathfinding algorithms:
 
-  * Dijkstra’s Algorithm (Shortest Path)
-  * Breadth-First Search (Minimum Stops)
-  * Depth-First Search
-  * A* Algorithm (Heuristic-based)
+  * **Dijkstra’s Algorithm** – Shortest Path
+  * **Breadth-First Search (BFS)** – Minimum Stops
+  * **Depth-First Search (DFS)**
+  * **A* Algorithm** – Heuristic-based pathfinding
 * Graph visualization using **NetworkX** and **Matplotlib**
-* Dynamic edge weights (weather + congestion simulation)
+* Dynamic edge weights based on weather and congestion simulation
 * Displays:
 
-  * Route path
+  * Selected route
   * Total cost
   * Number of stops
 
@@ -31,35 +31,35 @@ It allows users to compare different pathfinding strategies visually and underst
 
 ### 1. Dijkstra’s Algorithm
 
-Finds the shortest path based on total travel cost.
+Used to find the shortest path based on the total travel cost.
 
 ### 2. Breadth-First Search (BFS)
 
-Finds the path with the minimum number of stops.
+Finds a route with the minimum number of stops.
 
 ### 3. Depth-First Search (DFS)
 
-Explores paths deeply and returns the best found route.
+Explores the available paths deeply and returns the best route found.
 
 ### 4. A* Algorithm
 
-Uses heuristic (Euclidean distance) to find an efficient path.
+Uses a heuristic based on Euclidean distance to find an efficient route.
 
 ---
 
 ## 🛠️ Technologies Used
 
-* Python
-* Tkinter (GUI)
-* NetworkX (Graph handling)
-* Matplotlib (Visualization)
-* PIL (Image handling)
+* **Python**
+* **Tkinter** – GUI
+* **NetworkX** – Graph handling
+* **Matplotlib** – Graph visualization
+* **PIL** – Image handling
 
 ---
 
 ## 📂 Project Structure
 
-```
+```text
 app.py
 requirements.txt
 README.md
@@ -69,17 +69,17 @@ README.md
 
 ## ▶️ How to Run
 
-1. Clone the repository or download the files
+### 1. Clone the repository or download the project files.
 
-2. Install dependencies:
+### 2. Install the required dependencies:
 
-```
+```bash
 pip install -r requirements.txt
 ```
 
-3. Run the project:
+### 3. Run the application:
 
-```
+```bash
 python app.py
 ```
 
@@ -87,49 +87,56 @@ python app.py
 
 ## 📊 Sample Airports
 
-* DEL (Delhi)
-* MUM (Mumbai)
-* BLR (Bangalore)
-* HYD (Hyderabad)
-* CCU (Kolkata)
-* DXB (Dubai)
-* SIN (Singapore)
-* LHR (London)
+The project includes the following sample airports:
+
+* **DEL** – Delhi
+* **MUM** – Mumbai
+* **BLR** – Bangalore
+* **HYD** – Hyderabad
+* **CCU** – Kolkata
+* **DXB** – Dubai
+* **SIN** – Singapore
+* **LHR** – London
 
 ---
 
 ## 💡 How It Works
 
-* Airports are modeled as nodes in a graph.
-* Routes between them are edges with weights.
-* Weight = Distance + Weather Penalty + Congestion Factor.
-* Selected algorithm computes the best route.
+* Airports are represented as **nodes** in a graph.
+* Flight routes between airports are represented as **edges**.
+* Each edge has a weight calculated using:
+
+```text
+Weight = Distance + Weather Penalty + Congestion Factor
+```
+
+* The selected algorithm is then used to calculate the best available route.
 
 ---
 
 ## 📸 Output
 
-* GUI displays selected route and cost.
-* Graph visualization highlights optimal path.
+* The GUI displays the selected route and its total cost.
+* The graph visualization highlights the selected optimal path.
 
 ---
 
 ## ⚠️ Notes
 
-* Results may vary due to random weather and congestion factors.
-* BFS does not guarantee minimum cost (only minimum stops).
+* Results may vary because weather and congestion factors are generated dynamically.
+* **BFS does not guarantee the minimum cost route**; it only finds a route with the minimum number of stops.
 
 ---
 
 ## 👨‍💻 Author
 
-Ayush Bhatt
+**Ayush Bhatt**
 
 ---
 
 ## 📚 Subject Use
 
-* DAA (Algorithm implementation)
-* AI (Heuristic-based pathfinding using A*)
+This project is useful for:
 
----
+* **DAA** – Implementation and comparison of different graph algorithms
+* **AI** – Heuristic-based pathfinding using the **A*** algorithm
