@@ -8,7 +8,7 @@ The application allows users to compare different pathfinding algorithms and see
 
 ---
 
-## 🚀 Featur
+## 🚀 Feature
 
 * Interactive GUI using **Tkinter**
 * Supports multiple pathfinding algorithms:
